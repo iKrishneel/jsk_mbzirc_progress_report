@@ -26,6 +26,10 @@ We use the heliport model to train a linear classifier for detection of landing 
 Once the target is localized, the UAV uses pose information from the visual tracker to navigate towards the target. 
 
 
+\subsection{Results Achieved to Date}
+In this task, we have completed target detection and tracking autonomously in Gazebo simulator. 
+Moreover we have also tested our tracking algorithm on an outdoor video sequence of a heliport marker afixed to a van traveling around a track at various speed. The video was taken from DJI Phantom 4 and processed in offline to test the stability, robustness and speed of tracking.
+
 
 \subsection{Future Works}
 The future work on software for task 1 involves testing the completed softwares on the actual UAV which is developed by the team. This involves fine tuning the current simulator version of our softwares. Considering the challenges on the outdoor environment such as abrupt changes in image space, winds speeds etc. the landing stretegy might vary significantly from the simulator version. One very important aspect of autonomous systems which we like to implement is the ability of the UAV to recover from erroneous decision, false positives that might result in highly cluttered and unstructured scene.
