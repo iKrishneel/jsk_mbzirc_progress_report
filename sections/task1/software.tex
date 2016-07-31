@@ -10,7 +10,7 @@
 
 \subsection{Software}
 
-The software, including motion planning, visual perception and virtual simulation, are developed on the ROS robot operating system, and we use Gazebo for performing simulations \footnote{\url{https://github.com/start-jsk/jsk_mbzirc}}. We use the Gazebo simulator for testing and planning our strategy and for customizing our hardware and software. The visual perception component carries out target (heliport) localization of the moving vehicle, and we plan the efficient approaching and landing strategy based on the motion of both the UAV and the vehicle. Since we use Nvidia TX1 embedded processor for fast computations on GPU, our algorithms for \textit{task 1} and \textit{task 3} are developed in CUDA-C, C/C++ and Python. 
+The software, including motion planning, visual perception and virtual simulation, are developed on Robot Operating System (ROS) environment, and we use Gazebo for performing simulations \footnote{\url{https://github.com/start-jsk/jsk_mbzirc}}. We use the Gazebo simulator for testing and planning our strategy and for customizing our hardware and software. The visual perception component carries out target (heliport) localization of the moving vehicle, and we plan the efficient approaching and landing strategy based on the motion of both the UAV and the vehicle. Since we use Nvidia TX1 embedded processor for fast computations on GPU, our algorithms for \textit{task 1} and \textit{task 3} are developed in CUDA-C, C/C++ and Python. 
 
 % \begin{figure}[t]
 %   \includegraphics[width=\columnwidth, trim={2cm 5cm 3cm 7cm},clip]{sections/task1/images/testbed}
@@ -24,7 +24,7 @@ The software, including motion planning, visual perception and virtual simulatio
 We use the heliport model to train a linear classifier for detection of the landing region. Since heliport model is known, it is used as an a priori for learning. Once the heliport is detected, a visual object tracker running in real time on-board is autonomously initialized to start tracking the target region. We use a robust tracking algorithm with efficient drift compensation algorithm to avoid lost of target when the UAV is in motion. Our visual tracking algorithm is also able to recover the target even if it went completely out of view. Once the target is localized, the UAV uses pose information from the visual tracker to navigate towards the target and plan out a landing stretegy.
 
 \subsection{Results Achieved to Date}
-In this task, we have completed target detection and tracking autonomously in Gazebo simulator. 
+In this task, we have completed target detection and tracking autonomously and landing in a Gazebo simulator. 
 Moreover we have also tested our tracking algorithm on an outdoor video sequence of a heliport marker afixed to a van traveling around a track at various speed. The video was taken from DJI Phantom 4 and processed in offline to test the stability, robustness and speed of tracking.
 
 
