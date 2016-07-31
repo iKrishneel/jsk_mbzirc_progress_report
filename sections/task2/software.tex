@@ -10,9 +10,10 @@
 \begin{document}
 
 \subsection{Hardware}
-Our robot consists of an upper body humanoid(hrp2) on a high-power mobile base(Fig.\ref{fig:figure1}). The robot is equipped with a stereo camera, a long range laser sensor, a global positioning system (GPS), and a custom made gripper. The gripper consists of a magnet embedded link actuated by a servo motor as shown in Fig.\ref{fig:figure2}. The wrist is also equipped with a six axis force torque sensor.
+Our robot consists of an upper body humanoid(hrp2) on a high-power mobile base as shown in Fig.\ref{fig:figure1}. The robot is equipped with a stereo camera, a long range laser sensor, a global positioning system (GPS), and a custom made gripper. The gripper consists of a magnet embedded link actuated by a servo motor as shown in Fig.\ref{fig:figure2}. The wrist is also equipped with a six axis force torque sensor.
 
-The hrp2 is our lab's main robot, it is relatively mature and we have created a lot of software packages for this robot, like the lisp based program language euslisp. For the moving base, we bought the base and designed both the control hardware circuits and the ROS control interface for the moving base.
+The hrp2 is our lab's main robot, it is relatively mature and we have created a lot of software packages for this robot, like the lisp based program language euslisp. %For the moving base, 
+We bought a mobile wheel base robot platform to replace the legs of the humanoid robot and designed both the control hardware circuits and the ROS control interface for the moving base.
 
 
 \begin{figure}[t]
@@ -26,15 +27,13 @@ The hrp2 is our lab's main robot, it is relatively mature and we have created a 
 For task 2, the softwares are also implemented on ROS environment with utilization of multithreading for fast computation. Euslisp programming language from JSK lab was used for kinematics simulation and robot control. OpenCV and in-house developed algorithms
  \footnote{\url{https://github.com/jsk-ros-pkg/jsk_recognition}} are used for recognition and perception.
 
-
  \subsection{General Approach}
- \textbf{Navigation}: Our approach is to use the long range laser sensor and the GPS for searching and navigating to the panel when the robot is far from the robot and is out of range for the stereo camera. As the panel becomes closer than the minimum range of the laser sensor, the robot will then switch over to use the stereo camera. Our high-powered mobile base can reach up to 4m/s and can drive through various outdoor terrains. 
+ \textbf{Navigation}: Our approach is to use the long range laser sensor and the GPS positioning for searching and navigating to the panel when the robot is at a far distance and the panel is out of range of stereo sensors.  %from the panel and is out of range for the stereo camera. 
+As the panel becomes closer than the minimum range of the laser sensor, the robot will then switch over to use the stereo camera. Our high-powered mobile base can reach up to 4m/s and can drive through various outdoor terrains. 
 
-\textbf{Wrench and valve stem detection}: We experimented and compared infrared camera with stereo camera, and we have decided to use stereo camera for close range perception, since infrared cameras tend to fail in outdoor sunny environments, and cannot sense objects that are too close to the robot. 
+\textbf{Wrench and valve stem detection}: We experimented and compared infrared camera with stereo camera, and we have decided to use stereo camera for close range perception, since infrared cameras tend to fail in outdoor environments subjected to UAV lightings, and cannot sense objects that are too close to the robot. 
 
-We detect the wrench by using Edge detection, Hough transform and K-means. Firstly, we select a region include 6 wrenches on the camera image(Fig.\ref{fig:figure3}A). We apply hough line transform to the edge image of selected region and extract lines which have large slope, then apply K-means(K is 6) to extracted lines. The size of wrenches can be estimated from classified lines, but the position of wrenches estimated from lines is not correct(Fig.\ref{fig:figure3}B). Therefore we use Hough circle transform to detect the hanger on image(Fig.\ref{fig:figure3}C) and get depth from point cloud(Fig.\ref{fig:figure3}D). Thus, we can detect the size and position of wrenches.  
-
-We also select the region on the camera image to detect the valve stem(Fig.\ref{fig:figure3}A). We estimate the plane from the point cloud in the selected region, extract the points witch exist in front of the plane(Fig.\ref{fig:figure3}E). The centoroid of the extracted points is considered as the position of the valve stem(Fig.\ref{fig:figure3}F).
+We detect the wrench by using Edge detection, Hough transform and K-means. Firstly, we select a region circumscribing the 6 wrenches on the camera image as shown in Fig.\ref{fig:figure3}A. We apply hough line transform to the edge image of selected region and extract lines which have large slopes, then apply K-means (K is 6) to extracted lines. The size of wrenches can be estimated from classified lines, but the position of wrenches estimated from lines is not correct as illustrated in Fig.\ref{fig:figure3}B. Therefore we use Hough circle transform to detect the hanger (circular part of the wrench) on image (Fig.\ref{fig:figure3}C) and get depth from point cloud (Fig.\ref{fig:figure3}D). Hence, we can detect the size and position of wrenches. We also select the region on the camera image to detect the valve stem (Fig.\ref{fig:figure3}A). We estimate the plane from the point cloud in the selected region and extract the points in front of the plane (Fig.\ref{fig:figure3}E. The centoroid of the extracted points is considered as the position of the valve stem (Fig.\ref{fig:figure3}F).
 
 \textbf{Picking the wrench}: Our robot picks up the wrench by aligning the gripper with the wrench, moving the gripper toward the wrench, and letting the magnets pull the wrench into the gripper. The gripper is designed so that the wrench is grasps firmly, but with some movement possible for passive compliance.
 
