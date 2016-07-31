@@ -16,11 +16,22 @@ For the snake-like UAV, we program it to grasp the treasure, so the thing is dif
 The software system is based on ROS(Robot Operation System). We write our algorithm to the every single node and communicate with each node. Basically for task 3, we divide the task into three states: Search, Pick and Place. The UAVs are always within these three states and the states automatically transferred to the next one if the certain condition is satisfied as Fig. \ref{t3state} shows. In "Search" state, the drone will randomly first go to the center and randomly generate a search end-point, the treasure detector will work when the drone is searching, once the object is detected and locked, a pick motion will be generated in the "Pick" state, the UAV will open the Elec-Magnet and moving approach to the treasure. The next state transfer signal depends on the trigger of the tactile sensor, one the Elec-Magnet catch the treasure, the UAV enters "Place" state, it will directly fly to the placing zone and find the place box. After release the treasure upon the place box, the UAV re-enter the "Search" state.
  \begin{figure}%[hb]
     \begin{center}
-        \includegraphics[keepaspectratio=true, width=1\linewidth, height=0.20\textheight]{img//task3state.png}
-      \end{center}
+      \includegraphics[keepaspectratio=true, width=1\linewidth, height=0.20\textheight]{img//task3state.png}
+    \end{center}
     \caption{UAV State in Task 3}
     \label{t3state}
-    \end{figure}
+  \end{figure}
+
+    
+  \begin{figure}[b]
+    \begin{center}
+      \includegraphics[keepaspectratio=true, width=1\linewidth, height=0.20\textheight]{img//t3simu.jpg}
+    \end{center}
+    \caption{Task 3 Simulation}
+    \label{t3state}
+  \end{figure}
+
+
 \subsubsection{Treasure Detection}
 As the treasures have distinct color features compared to the ground, we first tried the easiest detection method to find the treasure. 
 
@@ -32,20 +43,6 @@ When we get all the clusters, we apply a simple tracker to every cluster center 
 
 \subsubsection{Experiment}
 We first perform full automatic simulation in gazebo. To fully simulate the real scene, we also manually add noise and outliers to the detection. In the simulation, our UAV can almost achieve $70s$ for per object, if three UAVs cooperate together, we believe we can do that better.
-
-
-    
-     \begin{figure}%[hb]
-    \begin{center}
-        \includegraphics[keepaspectratio=true, width=1\linewidth, height=0.20\textheight]{img//t3simu.jpg}
-      \end{center}
-    \caption{Task 3 Simulation}
-    \label{t3state}
-    \end{figure}
-
-
-
-
 
 
 \end{document}

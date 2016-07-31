@@ -21,14 +21,15 @@ The software are developed on ROS environment which includes motion planning, vi
 \subsection{General Approach}
 
 %\textbf{Vehicle And Heliport Detection}: 
-We use the heliport model to train a linear classifier for detection of landing region. Since heliport model will be consistent it can be used as a priori for learning. Once the heliport is detected, a visual object tracker running at real time on-board is autonomously initialized to start tracking the target region. We use a robust tracking algorithm with efficient tracking drift compensation algorithm to avoid lost of target when the UAV is in motion. Moreover our visual tracking algorithm is able to recover the target even if its completely out of view.
+We use the heliport model to train a linear classifier for detection of landing region. Since heliport model will be consistent, it can be used as a priori for learning. Once the heliport is detected, a visual object tracker running at real time on-board is autonomously initialized to start tracking the target region. We use a robust tracking algorithm with efficient drift compensation algorithm to avoid lost of target when the UAV is in motion. Moreover our visual tracking algorithm is able to recover the target even if its completely out of view. 
 
-
-Once the target is localized, the UAV uses this information to navigate towards the target. 
+Once the target is localized, the UAV uses pose information from the visual tracker to navigate towards the target. 
 
 
 
 \subsection{Future Works}
-The future work on software for task 1 involves testing the complete software on the actual UAV which is developed by the team. Considering the challenges on the outdoor environment such as abrupt changes in image space, winds speeds etc., we believe that we will have to improve our current landing strategy in the real world. 
+The future work on software for task 1 involves testing the completed softwares on the actual UAV which is developed by the team. This involves fine tuning the current simulator version of our softwares. Considering the challenges on the outdoor environment such as abrupt changes in image space, winds speeds etc. the landing stretegy might vary significantly from the simulator version. One very important aspect of autonomous systems which we like to implement is the ability of the UAV to recover from erroneous decision, false positives that might result in highly cluttered and unstructured scene.
+
+%we will have to improve our current landing strategy in the real world. 
 
 \end{document}
