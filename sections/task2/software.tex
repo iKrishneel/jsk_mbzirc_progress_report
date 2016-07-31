@@ -10,7 +10,7 @@
 \begin{document}
 
 \subsection{Hardware}
-Our robot consists of an upper body humanoid on a high-power mobile base. The robot is equipped with a stereo camera, a long range laser sensor, a global positioning system (GPS), and a custom made gripper. The gripper consists of a magnet embedded link actuated by a servo motor as shown in Fig.\ref{fig:figure1}. The wrist is also equipped with a six axis force torque sensor. 
+Our robot consists of an upper body humanoid on a high-power mobile base(Fig.\ref{fig:figure1}). The robot is equipped with a stereo camera, a long range laser sensor, a global positioning system (GPS), and a custom made gripper. The gripper consists of a magnet embedded link actuated by a servo motor as shown in Fig.\ref{fig:figure2}. The wrist is also equipped with a six axis force torque sensor. 
 
 
 \begin{figure}[t]
@@ -30,13 +30,13 @@ For task 2, the softwares are also implemented on ROS environment with utilizati
 
 \textbf{Wrench and valve stem detection}: We experimented and compared infrared camera with stereo camera, and we have decided to use stereo camera for close range perception, since infrared cameras tend to fail in outdoor sunny environments, and cannot sense objects that are too close to the robot. 
 
-We detect the wrench by using Edge detection, Hough transform and K-means. Firstly, we select a region include 6 wrenches on the camera image(Figure 1A). We apply hough line transform to the edge image of selected region and extract lines which have large slope, then apply K-means(K is 6) to extracted lines. The size of wrenches can be estimated from classified lines, but the position of wrenches estimated from lines is not correct(Figure 1B). Therefore we use Hough circle transform to detect the hanger on image(Figure 1C) and get depth from point cloud(Figure 1D). Thus, we can detect the size and position of wrenches.  
+We detect the wrench by using Edge detection, Hough transform and K-means. Firstly, we select a region include 6 wrenches on the camera image(Fig.\ref{fig:figure3}A). We apply hough line transform to the edge image of selected region and extract lines which have large slope, then apply K-means(K is 6) to extracted lines. The size of wrenches can be estimated from classified lines, but the position of wrenches estimated from lines is not correct(Fig.\ref{fig:figure3}B). Therefore we use Hough circle transform to detect the hanger on image(Fig.\ref{fig:figure3}C) and get depth from point cloud(Fig.\ref{fig:figure3}D). Thus, we can detect the size and position of wrenches.  
 
-We also select the region on the camera image to detect the valve stem(Figure 1A). We estimate the plane from the point cloud in the selected region, extract the points witch exist in front of the plane(Figure 1E). The centoroid of the extracted points is considered as the position of the valve stem(Figure 1F).
+We also select the region on the camera image to detect the valve stem(Fig.\ref{fig:figure3}A). We estimate the plane from the point cloud in the selected region, extract the points witch exist in front of the plane(Fig.\ref{fig:figure3}E). The centoroid of the extracted points is considered as the position of the valve stem(Fig.\ref{fig:figure3}F).
 
 \textbf{Picking the wrench}: Our robot picks up the wrench by aligning the gripper with the wrench, moving the gripper toward the wrench, and letting the magnets pull the wrench into the gripper. The gripper is designed so that the wrench is grasps firmly, but with some movement possible for passive compliance.
 
-\textbf{Wrench fitting and turning}: To fit the wrench head onto the valve stem, we use force feedback from the wrist to gauge the tool contact state. The robot first moves its gripper above the detected position of the valve stem. Due to error in detection or calibration, the wrench head could be directly above the valve stem or it can be slightly misaligned (Figure 1A, B). The robot moves its gripper down, until a force in the vertical direction is detected, indicating that the wrench has come in contact with the valve stem. Once it detects contact with the valve stem, the wrench can be in one of the contacts states as shown in Figure 1 The robot then moves its gripper in the horizontal direction in a widening zigzag pattern. Depending on the forces it detects, the robot then begins to turn the wrench, or adjusts its gripper positon and retries to fit the wrench (Figure 1).
+\textbf{Wrench fitting and turning}: To fit the wrench head onto the valve stem, we use force feedback from the wrist to gauge the tool contact state. The robot first moves its gripper above the detected position of the valve stem. Due to error in detection or calibration, the wrench head could be directly above the valve stem or it can be slightly misaligned (Fig.\ref{fig:figure4}A, B). The robot moves its gripper down, until a force in the vertical direction is detected, indicating that the wrench has come in contact with the valve stem. Once it detects contact with the valve stem, the wrench can be in one of the contacts states as shown in Figure 1 The robot then moves its gripper in the horizontal direction in a widening zigzag pattern. Depending on the forces it detects, the robot then begins to turn the wrench, or adjusts its gripper positon and retries to fit the wrench (Fig.\ref{fig:figure4}).
 
 \begin{figure}
   \includegraphics[width=\columnwidth]{sections/task2/images/gripper}
@@ -44,11 +44,16 @@ We also select the region on the camera image to detect the valve stem(Figure 1A
   \label{fig:figure2}
 \end{figure}
 
+\begin{figure}
+  \includegraphics{sections/task2/images/figure3}
+  \caption{Wrench and valve stem detection.}
+  \label{fig:figure3}
+\end{figure}
 
 \begin{figure}
-  \includegraphics[width=\columnwidth]{sections/task2/images/figure3}
+  \includegraphics[width=\columnwidth]{sections/task2/images/figure4}
   \caption{Using force fitting for wrench fitting}
-  \label{fig:figure3}
+  \label{fig:figure4}
 \end{figure}
 
 
