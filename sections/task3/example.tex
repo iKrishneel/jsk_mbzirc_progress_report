@@ -6,13 +6,60 @@
 
 \section{task3}
 \subsection{Platforms}
-For task 3, we applied two kinds of UAVs to challenge the task. The "Hawk" which is similar to the one used in task 1 and the transformable snake-like UAV[[[better to have figure here]]]. 
+For task 3, we applied two kinds of UAVs to challenge the task. The general UAV called "hawk" as shown in Fig.\ref{fig:task3-hawk}, which is similar to the one used in task 1, and the transformable aerial robot with multilink which is called "Hydrus"(Fig.\ref{fig:task3-hydrus}). As described in Fig.\ref{fig:task3-hydrus-platform},tThe hardware platform of "Hydrus" envolves the controller for joints which enables the stable aerial transformation.
 
-As all the UAVs uses the same control board we built, the center control hardware parts are almost as same as the task 1, except that we additionally designed anther PCB board for controlling the Electronic-Magnet. We equipped 5 Elec-Magnet in the UAV and build the attachment with tactile sensors. The Elec-Magnet control board is connected to the center control unit through CAN bus.
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[clip,  bb=115 4 666 535,  width=\columnwidth]{sections/task3/images/task3-tarrot810.pdf}
+    \caption{Image of task3 Hawk}
+    \label{fig:task3-hawk}
+  \end{center}
+\end{figure} 
 
-For the snake-like UAV, we program it to grasp the treasure, so the thing is different...
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[clip,  bb=0 105 720 535,  width=\columnwidth]{sections/task3/images/task3-hydrus.pdf}
+    \caption{Image of Hydrus}
+    \label{fig:task3-hydrus}
+  \end{center}
+\end{figure} 
 
-\subsection{Software Approach}
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[clip,  bb=0 0 720 540,  width=\columnwidth]{sections/task3/images/hydrus-platform.pdf}
+    \caption{Hardware platform of task3 Hawk}
+    \label{fig:task3-hydrus-platform}
+  \end{center}
+\end{figure} 
+
+
+
+Although the flight control algorithms between "Hawk" and "Hydrus" are fundamentally different, we use the smae flight controller board which is build by ourselves. We additionally designed another PCB board for controlling the eletromagnet module which can generate the suction force up to 20[N]. We equipped 5 eletromagnet in the UAV and build the attachment with tactile sensors as shwon in Fig.\ref{fig:task3-hawk}(c). The electro-magnet moudle control board is connected to the flight  controller board unit through CAN bus.
+
+For the transformable UAV, we introduce the prototype which contains four links and three servo joints. The modularization of the whole platform is achieved by distributing the power and control system to each link with excpect of flight controller and sensors. Therefore, it becomes easier to the change the amount of rotors, according to the application of the flight.
+
+\subsection{Aerial Manipulation Strategy}
+For each type of UAV, we develop different piccking method. For "hawk" type UAV, we appy the magnetic force to absorb the ferrous object as shown in Fig.\ref{fig:task3-hawk-manipulation}. When the contact between the bottom of landing gear and object occurs, the tactile sensor provides certain signal, leading the actication of the eletromagnet module. We have achieve to the pick and carry the object inder indoor enviroment using motion capture system, which confirm the validty of the eletro-magnet based manipulation strategy. The cylinder type object is created according to the regulation description.
+
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[clip,  bb=0 110 720 540,  width=\columnwidth]{sections/task3/images/task3-tarrot810-manipulation.pdf}
+    \caption{Aerial manipulation method of Hawk}
+    \label{fig:task3-hawk-manipulation}
+  \end{center}
+\end{figure} 
+
+On the other hand, the object transporation based on the whole-body-manipulation strategy using "Hydrus" is also acheived as shown in Fig.\ref{fig:task3-hydrus-manipulation}. The grasping control is developped  based on the torque feedback from each joint. 
+
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[clip,  bb=0 0 720 540,  width=\columnwidth]{sections/task3/images/task3-hydrus-manipulation.pdf}
+    \caption{Aerial manipulation method of Hydrus}
+    \label{fig:task3-hydrus-manipulation}
+  \end{center}
+\end{figure} 
+
+\subsection{Software}
 \subsubsection{General Approach}
 The software system is based on ROS(Robot Operation System). We write our algorithm to the every single node and communicate with each node. Basically for task 3, we divide the task into three states: Search, Pick and Place. The UAVs are always within these three states and the states automatically transferred to the next one if the certain condition is satisfied as Fig. \ref{t3state} shows. In "Search" state, the drone will randomly first go to the center and randomly generate a search end-point, the treasure detector will work when the drone is searching, once the object is detected and locked, a pick motion will be generated in the "Pick" state, the UAV will open the Elec-Magnet and moving approach to the treasure. The next state transfer signal depends on the trigger of the tactile sensor, one the Elec-Magnet catch the treasure, the UAV enters "Place" state, it will directly fly to the placing zone and find the place box. After release the treasure upon the place box, the UAV re-enter the "Search" state.
  \begin{figure}%[hb]
@@ -22,6 +69,7 @@ The software system is based on ROS(Robot Operation System). We write our algori
     \caption{UAV State in Task 3}
     \label{t3state}
     \end{figure}
+
 \subsubsection{Treasure Detection}
 As the treasures have distinct color features compared to the ground, we first tried the easiest detection method to find the treasure. 
 
@@ -31,20 +79,21 @@ min||p_i - p_j|| \geq d_{threhold}
 \end{equation}
 When we get all the clusters, we apply a simple tracker to every cluster center and as we continue detect the same cluster, we will increase the weight of the tracker, the clusters that are not always being detect will be slowly forget and finally be removed from the treasure candidates vector. The UAV will lock the cluster candidate when the weight is large enough and switch into the "Pick" mode to approach the treasure.
 
-\subsubsection{Experiment}
+\subsubsection{Simulation}
 We first perform full automatic simulation in gazebo. To fully simulate the real scene, we also manually add noise and outliers to the detection. In the simulation, our UAV can almost achieve $70s$ for per object, if three UAVs cooperate together, we believe we can do that better.
 
+\begin{figure}%[hb]
+  \begin{center}
+    \includegraphics[keepaspectratio=true, width=1\linewidth, height=0.20\textheight]{img//t3simu.jpg}
+  \end{center}
+  \caption{Task 3 Simulation}
+  \label{t3state}
+\end{figure}
 
-    
-     \begin{figure}%[hb]
-    \begin{center}
-        \includegraphics[keepaspectratio=true, width=1\linewidth, height=0.20\textheight]{img//t3simu.jpg}
-      \end{center}
-    \caption{Task 3 Simulation}
-    \label{t3state}
-    \end{figure}
+\subsubsection{Future Work}
+The future work on hardware platform for task 3 contains the improvement of the structural strength, as well as the enhancement of the modularization of link system by using CAN communication network. We will also continue to validate the performance of the eletromagnet module, and the  collaboration between the eletromagnetic force and whole-body-manipulation will be developped for the "Hydrus."
 
-
+The future work on software for task 3 involves the outdoor expeirment with acutal robot to test the performance of both eletromagnet module and whole-body-manipulation. Further more, we will focus on the collaborative motion for picking up the large object using two or three UAV simultaneously, as well as the swarm control strategy while searching object..
 
 \section{Project Personnel}
 Team JSK have 11 team members including 5 key members. We have a professor, a associate-professor, a lecturer, a researcher, 4 PHD students and 2 Master students in our team. Teachers mainly focus on manage the whole team schedule, design hardware and software architecture, provide advices and give ideas for all the tasks. The rest researcher and students are divided into three groups, one for computer vision development for all the tasks, one for task 2 and one for task 1 and 3.

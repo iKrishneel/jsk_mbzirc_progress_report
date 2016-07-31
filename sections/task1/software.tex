@@ -23,12 +23,12 @@ The softwares are developed on ROS environment which includes motion planning, v
 %\textbf{Vehicle And Heliport Detection}: 
 We use the heliport model to train a linear classifier for detection of landing region. Since heliport model will be consistent it can be used as a priori for learning. Once the heliport is detected, a visual object tracker running at real time onboard is autonomously initalized to start tracking the target region. We use a robust tracking algorithm with efficient tracking drift compensation algorithm to avoid lost of target when the uav is in motion. Moreover our visual tracking algorithm is able to recover the target even if its completely out of view.
 
-
 Once the target is localized, the UAV uses this information to navigate towards the target. 
 
 
-
 \subsection{Future Works}
-The future work on software for task 1 involves testing the complete software on the actual UAV which is developed by the team. Considering the challenges on the outdoor environment such as abrupt changes in image space, winds speeds etc., we believe that we will have to improve our current landing stretegy in the real world. 
+The future work on hardware platform for task 1 includes the design of landing gear which enables to attach to a moving heliport. The sturdy and light protector of UAV is another issue to avoid the crash while hitting to the truck.
+
+The future work on software for task 1 involves the vision based egomotion estimation which is more robust than GPS based localization. With the stable flight platform, the testing the software associated with motion tracking which is developed on the simulation system will be operated on the actual UAV. Considering the challenges on the outdoor environment such as abrupt changes in image space, winds speeds etc., we believe that we will have to improve our current landing stretegy in the real world. 
 
 \end{document}
