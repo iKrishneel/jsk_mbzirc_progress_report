@@ -1,0 +1,72 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%        1         2         3         4         5         6         7         8
+
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out if you need a4paper
+
+%\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4 paper
+
+\IEEEoverridecommandlockouts                              % This command is only needed if 
+                                                          % you want to use the \thanks command
+
+\overrideIEEEmargins                                      % Needed to meet printer requirements.
+
+
+\usepackage{graphics} % for pdf, bitmapped graphics files
+\usepackage{epsfig} % for postscript graphics files
+\usepackage{mathptmx} % assumes new font selection scheme installed
+\usepackage{times} % assumes new font selection scheme installed
+\usepackage{amsmath} % assumes amsmath package installed
+\usepackage{amssymb}  % assumes amsmath package installed
+
+\usepackage[font=small,labelfont=bf]{caption}
+
+% Other package
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{caption} 
+\usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\usepackage{pdfpages}
+\usepackage{caption}
+%\usepackage{geometry}
+\usepackage{import}
+\usepackage{standalone}
+
+\title{\LARGE \bf
+  Team-JSK: MBZIRC Progress Report
+}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+
+\section{Introduction}
+This document provides a report of Team JSK’s progress in preparing for the Mohamed Bin Zayed International Robotics Challenge (MBZIRC). The team consists of members from the JSK Laboratory at the University of Tokyo. The JSK Lab, founded in early 1980’s, has a long history of robotics research with focus on areas including humanoids, drones, robotics manipulation, and perception. The lab has experience in participating in robotics challenges including the DARPA Robotic Challenge and the Amazon Picking Challenge.
+
+
+
+\section{CHALLENGE 1: LANDING UAV ON A MOVING VEHICLE}
+
+\input{sections/task1/software.tex}
+\input{sections/task1/hardware.tex}
+%% insert yout latex module file here. the contents should go to the tasks folder under section
+
+\section{CHALLENGE 2: OPERATING A VALVE STEM}
+\input{sections/task2/software.tex}
+
+\section{CHALLENGE 3: SEARCH, PICK AND PLACE}
+
+\section{GRAND CHALLENGE}
+
+\input{sections/task3/example.tex}
+
+\end{document}

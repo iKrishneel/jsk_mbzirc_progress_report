@@ -13,8 +13,8 @@
 Our robot consists of an upper body humanoid on a high-power mobile base. The robot is equipped with a stereo camera, a long range laser sensor, a global positioning system (GPS), and a custom made gripper. The gripper consists of a magnet embedded link actuated by a servo motor as shown in Fig.\ref{fig:figure1}. The wrist is also equipped with a six axis force torque sensor. 
 
 
-\begin{figure}
-  \includegraphics[height=2.5in, width=1.5in]{sections/task2/images/figure1}
+\begin{figure}[t]
+  \includegraphics[width=\columnwidth]{sections/task2/images/hrp2}
   \caption{HRP2 robot platform for task2}
   \label{fig:figure1}
 \end{figure}
@@ -39,7 +39,7 @@ We also select the region on the camera image to detect the valve stem(Figure 1A
 \textbf{Wrench fitting and turning}: To fit the wrench head onto the valve stem, we use force feedback from the wrist to gauge the tool contact state. The robot first moves its gripper above the detected position of the valve stem. Due to error in detection or calibration, the wrench head could be directly above the valve stem or it can be slightly misaligned (Figure 1A, B). The robot moves its gripper down, until a force in the vertical direction is detected, indicating that the wrench has come in contact with the valve stem. Once it detects contact with the valve stem, the wrench can be in one of the contacts states as shown in Figure 1 The robot then moves its gripper in the horizontal direction in a widening zigzag pattern. Depending on the forces it detects, the robot then begins to turn the wrench, or adjusts its gripper positon and retries to fit the wrench (Figure 1).
 
 \begin{figure}
-  \includegraphics{sections/task2/images/figure2}
+  \includegraphics[width=\columnwidth]{sections/task2/images/gripper}
   \caption{Custom made magnetic gripper.}
   \label{fig:figure2}
 \end{figure}
