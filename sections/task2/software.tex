@@ -37,19 +37,21 @@ We detect the wrench by using Edge detection, Hough transform and K-means. First
 
 \textbf{Picking the wrench}: Our robot picks up the wrench by aligning the gripper with the wrench, moving the gripper toward the wrench, and letting the magnets pull the wrench into the gripper. The gripper is designed so that the wrench is grasps firmly, but with some movement possible for passive compliance.
 
-\textbf{Wrench fitting and turning}: To fit the wrench head onto the valve stem, we use force feedback from the wrist to gauge the tool contact state. The robot first moves its gripper above the detected position of the valve stem. Due to error in detection or calibration, the wrench head could be directly above the valve stem or it can be slightly misaligned as shown in Fig.\ref{fig:figure4}A, B. The robot moves its gripper down, until a force in the vertical direction is detected, indicating that the wrench has come in contact with the valve stem. Once it detects contact with the valve stem, the wrench can be in one of the contacts states as shown in Figure 1 The robot then moves its gripper in the horizontal direction in a widening zigzag pattern. Depending on the forces it detects, the robot then begins to turn the wrench, or adjusts its gripper position and retries to fit the wrench (Fig.\ref{fig:figure4}).
-
 \begin{figure}
   \includegraphics[width=\columnwidth]{sections/task2/images/gripper}
   \caption{Custom made magnetic gripper.}
   \label{fig:figure2}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[b]
   \includegraphics[width=\columnwidth]{sections/task2/images/detection}
   \caption{Wrench and valve stem detection.}
   \label{fig:figure3}
 \end{figure}
+
+
+\textbf{Wrench fitting and turning}: To fit the wrench head onto the valve stem, we use force feedback from the wrist to gauge the tool contact state. The robot first moves its gripper above the detected position of the valve stem. Due to error in detection or calibration, the wrench head could be directly above the valve stem or it can be slightly misaligned as shown in Fig.\ref{fig:figure4}A, B. The robot moves its gripper down, until a force in the vertical direction is detected, indicating that the wrench has come in contact with the valve stem. Once it detects contact with the valve stem, the wrench can be in one of the contacts states as shown in Figure 1 The robot then moves its gripper in the horizontal direction in a widening zigzag pattern. Depending on the forces it detects, the robot then begins to turn the wrench, or adjusts its gripper position and retries to fit the wrench (Fig.\ref{fig:figure4}).
+
 
 \begin{figure}
   \includegraphics[width=\columnwidth]{sections/task2/images/figure4}
