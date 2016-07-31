@@ -36,7 +36,7 @@ We also select the region on the camera image to detect the valve stem(Fig.\ref{
 
 \textbf{Picking the wrench}: Our robot picks up the wrench by aligning the gripper with the wrench, moving the gripper toward the wrench, and letting the magnets pull the wrench into the gripper. The gripper is designed so that the wrench is grasps firmly, but with some movement possible for passive compliance.
 
-\textbf{Wrench fitting and turning}: To fit the wrench head onto the valve stem, we use force feedback from the wrist to gauge the tool contact state. The robot first moves its gripper above the detected position of the valve stem. Due to error in detection or calibration, the wrench head could be directly above the valve stem or it can be slightly misaligned (Fig.\ref{fig:figure4}A, B). The robot moves its gripper down, until a force in the vertical direction is detected, indicating that the wrench has come in contact with the valve stem. Once it detects contact with the valve stem, the wrench can be in one of the contacts states as shown in Figure 1 The robot then moves its gripper in the horizontal direction in a widening zigzag pattern. Depending on the forces it detects, the robot then begins to turn the wrench, or adjusts its gripper positon and retries to fit the wrench (Fig.\ref{fig:figure4}).
+\textbf{Wrench fitting and turning}: To fit the wrench head onto the valve stem, we use force feedback from the wrist to gauge the tool contact state. The robot first moves its gripper above the detected position of the valve stem. Due to error in detection or calibration, the wrench head could be directly above the valve stem or it can be slightly misaligned (Fig.\ref{fig:figure3}A, B). The robot moves its gripper down, until a force in the vertical direction is detected, indicating that the wrench has come in contact with the valve stem. Once it detects contact with the valve stem, the wrench can be in one of the contacts states as shown in Figure 1 The robot then moves its gripper in the horizontal direction in a widening zigzag pattern. Depending on the forces it detects, the robot then begins to turn the wrench, or adjusts its gripper position and retries to fit the wrench (Fig.\ref{fig:figure3}).
 
 \begin{figure}
   \includegraphics[width=\columnwidth]{sections/task2/images/gripper}
@@ -44,24 +44,19 @@ We also select the region on the camera image to detect the valve stem(Fig.\ref{
   \label{fig:figure2}
 \end{figure}
 
-\begin{figure}
-  \includegraphics{sections/task2/images/figure3}
-  \caption{Wrench and valve stem detection.}
-  \label{fig:figure3}
-\end{figure}
 
 \begin{figure}
   \includegraphics[width=\columnwidth]{sections/task2/images/figure4}
   \caption{Using force fitting for wrench fitting}
-  \label{fig:figure4}
+  \label{fig:figure3}
 \end{figure}
 
 
 \subsection{Results Achieved to Date}
-We have completed the prototypes of our mobile base and customized gripper. The entire robot has been assembled and all sensors are functional. The robot can be operated through teleoperation, and we have been able to successfully complete challenge 2 using full teleoperation indoors and outdoors. 
-Recognition of the wrenches and the valve stem has also been implemented. Once we select the region to detect wrenches and valve stem, they will be detected autonomically.
+We have completed the prototypes of our mobile base and customized gripper. The entire robot has been assembled and all sensors are functional. The robot can be operated through tele-operation, and we have been able to successfully complete challenge 2 using full tele-operation indoors and outdoors. 
+Recognition of the wrenches and the valve stem has also been implemented. Once we select the region to detect wrenches and valve stem, they will be detected autonomously.
 We experimented with wrench fitting and turning with different initial wrench alignments. Among twenty trials, we were able to achieve a 95$\%$ success rate with only one failed trial. 
-We have also tested our system for performing the entire challenge 2 with partial autonomy in outdoor experiments. In our experiments, we used teleoperation to drive the robot’s mobile base, allowed the robot to detect the wrenches and valve stem with human supervision, and grasp, fit, and turn the wrench with full autonomy. In our fastest run, we were able to complete challenge 2 in less than ten minutes. This time can be easily shortened as many parts of our code had deliberate pauses for debugging and testing purposes.
+We have also tested our system for performing the entire challenge 2 with partial autonomy in outdoor experiments. In our experiments, we used tele-operation to drive the robot’s mobile base, allowed the robot to detect the wrenches and valve stem with human supervision, and grasp, fit, and turn the wrench with full autonomy. In our fastest run, we were able to complete challenge 2 in less than ten minutes. This time can be easily shortened as many parts of our code had deliberate pauses for debugging and testing purposes.
 
 \subsection{Future Plans}
 Our future plans include speeding up our task completion time, enabling autonomous navigation of the mobile base, autonomous search of the panel, full autonomous wrench and valve stem detection, and failure detection when grasping, fitting, and turning the wrench. We will also consider and compare alternative wrench detection, and wrench fitting methods. Currently, the valve stem we have been operating has very little resistance. While we have successfully turned a valve stem with 5Nm resistance, our gripper prototype broke after turning a quarter turn. We have already strengthened our gripper design, and as future work, we will be testing with valve stems having higher torque resistance.  Finally, we are also considering the potential use of another robot platform that is more lightweight and allows us to more easily transport it from Japan to the competition venue. 
