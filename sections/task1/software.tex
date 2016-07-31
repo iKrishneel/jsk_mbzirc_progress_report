@@ -21,12 +21,17 @@ The software, including motion planning, visual perception and virtual simulatio
 \subsection{General Approach}
 
 %\textbf{Vehicle And Heliport Detection}: 
-We use the heliport model to train a linear classifier for detection of the landing region. Since heliport model is known, it is used as an a priori for learning. Once the heliport is detected, a visual object tracker running in real time on-board is autonomously initialized to start tracking the target region. We use a robust tracking algorithm with efficient drift compensation algorithm to avoid lost of target when the UAV is in motion. Our visual tracking algorithm is also able to recover the target even if it went completely out of view. Once the target is localized, the UAV uses pose information from the visual tracker to navigate towards the target. 
+We use the heliport model to train a linear classifier for detection of the landing region. Since heliport model is known, it is used as an a priori for learning. Once the heliport is detected, a visual object tracker running in real time on-board is autonomously initialized to start tracking the target region. We use a robust tracking algorithm with efficient drift compensation algorithm to avoid lost of target when the UAV is in motion. Our visual tracking algorithm is also able to recover the target even if it went completely out of view. Once the target is localized, the UAV uses pose information from the visual tracker to navigate towards the target and plan out a landing stretegy.
 
+\subsection{Results Achieved to Date}
+In this task, we have completed target detection and tracking autonomously in Gazebo simulator. 
+Moreover we have also tested our tracking algorithm on an outdoor video sequence of a heliport marker afixed to a van traveling around a track at various speed. The video was taken from DJI Phantom 4 and processed in offline to test the stability, robustness and speed of tracking.
 
 
 \subsection{Future Plans}
 The future work on software for task 1 involves testing the completed software on the customized UAV which is currently under development. This involves fine tuning the current simulator version of our software. Considering the challenges in outdoor environment such as abrupt changes in image space, winds speeds etc. the landing strategy might vary significantly from the simulator version. One very important aspect of autonomous systems which we like to implement is the ability of the UAV to recover from erroneous decision, false positives that might result in highly cluttered and unstructured scene. To achieve this we plan to generate a map of the environment at the beginning for efficiently localizing the vehicle and for trajactory mapping. The idea is that, the UAV can use the constructed map, to eliminate regions that produces false positives. However, the current limitation is the time required for generating the map which we aim to reduce using the idea of task oriented solution.
+
+
 
 %we will have to improve our current landing strategy in the real world. 
 
