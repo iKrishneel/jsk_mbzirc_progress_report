@@ -4,6 +4,26 @@
 \documentclass{standalone}
 \begin{document}
 
+\subsection{TASK2 NEW GRIPPER}
+to be put to task2
+The last gripper in task 2 our humanoid robot have to fit the wrench into the shaft and rotate $360$ degrees by move the arm and solve the inverse kinematics. However, sometimes(usually) the inverse kinematics can not be solved due to the limitation of the arm. In the first report we attempt to rotate the wrench $4$ times with $90$ degrees each time. This is very time consuming and now we designed a new gripper that use the servo motor attached to the gripper which can directly robot $360$ degrees and capable of the torque $5NM$. 
+
 \subsection{Platforms}
+For task 3, we used customized DJI M100 as our platform which had been introduced in task 1. We equipped Nvidia Jetson TX1 and TK1 based embedded computer to do both control and vision algorithms. The magnets gripper is redesigned to be stronger to pick the objects and also for the drone to fly more stable. Temporarily we did the real world test through remote operation, we are also trying to set up the network configurations which is given by the MBZIRC committee recently. Also we accelerate our vision algorithm in gazebo simulation as we showed in the first report. For now we are trying to develop a semi-autonomous approach for task 3 considering the difficulties we meet in manually operation.
+
+\subsection{Magnet Gripper Design}
+The reason we choose electronic magnet is that it is easy to control if we design the circuits ourselves. The ordinary seems stronger but it may requires executor unit to push the object down when the drone will to release the object, which will make the attachment more complex and additional motor is needed. We also considered to use a air vacuum like our team in Amazon Picking Challenge, but the size of vacuum is too big for the drone in our case. 
+
+We equipped 5 small electronic magnets for a gripper of size $10cm \times 10cm$. Each electronic magnet is capable of more than $20N$ holding force if the objects are thick enough. However, according to our experiment, since each object is less than $500g$, the thickness will be less than $1.6mm$ if the object is a square of $20cm \times 20cm$ and made of pure iron(Consider the density of iron to be $7.86g/cm$). In addition, if the surface of the object is too big, the propeller effect will happen and therefore request the electronic magnets to be more powerful. Temporary our gripper with $5$ electronic magnets can pick the object of almost $1kg$ of the thickness of the iron is more than $0.3mm$. 
+
+Five touch sensors are equipped on the gripper with the electronic magnets to detect the contacts between the object and the gripper. Besides, five touch sensors will bring the position information of the gripper compared to the object since sometimes only $2$ or $3$ touch sensors are triggered and then we know the offset of the gripper and the object. 
+
+The design of the electronic magnet circuits driver is simple since it can be simply regarded as a series connection of a inductor and a small resistor, Darlington Transistor will be enough to driver a electronic magnet since the current request is only $200ma$. Because of the inductor effect, a protection diode is very necessary in the circuits. We designed the circuits board with a $32$ bits micro controller, a Darlington driver IC and both serial, CAN communication interface in the gripper board. We write a ROS node in the board and it can directly report the status of the magnets and touch sensors in the gripper and also receive the orders from the embedded computers. 
+
+\subsection{Teleoperation for Task 3}
+At this moment, we only perform the real platform experiment through teleoperation by human beings. When we control the UAV manually to pick the object, we figure out it is not a easy job for real UAV platform compared to the simulation since it is very difficult to control the UAV accurately to approach the object, in addition, the ground effect will unstable the UAV when the UAV is getting close to the ground. We address this problem by hanging the magnet gripper with a spring so that the UAV can pick the object without getting too close to the ground. However this may introduce another problem that the gripper will be shaking whenever the uav change the velocity, we are also addressing this problem now and try to get a stronger hanging method to make the gripper relatively stable.
+
+We tested on only one UAV and it seems we can picking $5$ static objects within $8$ minutes, the time could be improved if we adopt the semi-autonomous teleoperation method like store the global position of the box to drop the objects and after pick the object, the UAV can directly move to the global position of the aim box.
+
 
 \end{document}
