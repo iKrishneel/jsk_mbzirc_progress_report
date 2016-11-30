@@ -5,17 +5,25 @@
 \begin{document}
 
 \subsection{Platforms}
-For task 3, we used customized DJI M100 as our platform\ref{task3platform} which had been introduced in task 1. We equipped Nvidia Jetson TX1 and TK1 based embedded computer to do both control and vision algorithms. The magnets gripper is redesigned to be stronger to pick the objects and also for the drone to fly more stable. Temporarily we did the real world test through remote operation, we are also trying to set up the network configurations which is given by the MBZIRC committee recently. Also we accelerate our vision algorithm in gazebo simulation as we showed in the first report. For now we are trying to develop a semi-autonomous approach for task 3 considering the difficulties we meet in manually operation.
+For task 3, we developed two types of UAVs. We first used customized DJI M100 as our standard platform\ref{task3platform-m100} which had been introduced in task 1. We equipped Nvidia Jetson TX1 and TK1 based embedded computer to do both control and vision algorithms. The magnets gripper is redesigned to be stronger to pick the objects and also for the drone to fly more stable. For the second type, we improved the transformable aerial robot called {\bf Hydrus} \ref{task3platform-hydrus} as described in the first report. The propeller of  {\bf Hydrus} is 14[inch] which is much bigger than the prototpye, leading to the improvement of the flight performance. Temporarily we did the real world test through remote operation with the standard platform, we are also trying to set up the network configurations which is given by the MBZIRC committee recently. Also we accelerate our vision algorithm in gazebo simulation as we showed in the first report. For now we are trying to develop a semi-autonomous approach for task 3 considering the difficulties we meet in manually operation.
  \begin{figure}%[hb]
     \begin{center}
     \includegraphics[keepaspectratio=true, width=1\linewidth, height=0.3\textheight]
     {sections//task3//images//task3platform.png}
       \end{center}
-    \caption{Task 3 Platform DJI M100}
-    \label{task3platform}
+    \caption{Task 3 Platform: DJI M100}
+    \label{task3platform-m100}
+    \end{figure}
+ \begin{figure}%[hb]
+    \begin{center}
+      \includegraphics[clip, bb= 0 0 650 350, width=\columnwidth]{sections/task3/images/task3platform-hydrus.eps}
+      \end{center}
+    \caption{Task 3 Platform: Hydrus}
+    \label{task3platform-hydrus}
     \end{figure}
     
-\subsection{Electromagnet Gripper Design}
+    
+\subsection{Electromagnet Gripper for Quadcopter}
 The reason we choose electromagnet is that it is easy to control if we design the circuits ourselves. The ordinary seems stronger but it may requires executor unit to push the object down when the drone will to release the object, which will make the attachment more complex and additional motor is needed. We also considered to use a air vacuum like our team in Amazon Picking Challenge, but the size of vacuum is too big for the drone in our case. 
  \begin{figure}[hb]
     \begin{center}
