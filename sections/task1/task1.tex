@@ -142,6 +142,17 @@ For landing control, we first test our method to land on fixed truck, and result
 
 
 \subsection{Future Work}
+\subsubsection{Vision Algorithm}
+There are few improvements required to improve to robustness of our
+vision algorithms. Firstly, we will add tracker drift recovery mode to
+the visual tracking algorithm. The drift recovery will enable to
+tracker to recover from drifting effects which may result from
+occluded or lost target. Secondly, with implementation of drift
+recovery, we want the tracker to constantly update instead to fixed
+intervals. Such updating scheme will enable the tracker to adapt to
+online visual changes without a need of prior learning.
+
+
 \subsubsection{Landing Control}
 Since outdoor landing when target object is turning in high speed is an unsolved difficult problem, currently our landing is also restricted in straight-road landing. However in the challenge, starting from center crosswords, only a 20[m] straight road is available. If considering truck is moving with 15[Km/h] (4.2[m/s]), UAV has to land within 5[s]. Currently for development and safety consideration, our landing is slow and need around 15[s].
 In next stage, we plan to reevaluate this academic problems and make pioneer trails to generate realtime landing trajectory for landing during target object is turning with high speed.
