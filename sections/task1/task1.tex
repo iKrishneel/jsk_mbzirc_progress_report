@@ -79,12 +79,26 @@ Moreover, the tracker is updated online at fixed intervals.
   \caption{Illustration of truck and heliport detection.}
 \end{figure}
 
+\subsection{Control Method}
+
+\subsubsection{Landing Control}
+Our landing algorithm is closely cooperating with our robust tracking algorithm. We defined an inverted conical region related to the center of object. When UAV is stably moving in this region, UAV is considered tightly keeping in tracking with the moving object. Then UAV starts going down with stable speed. And our strategy is that when UAV is 0.3 meter higher than truck, we will stop going down and adjust to the most center of the parking apron and land directly and quickly to it. The reason is that currently our tracker in vision algorithm is to detect the inside circle region of parking apron, whose radius is 0.5 meter, and the look-down fisheye camera we used is 120 degree for perspective, so it means when UAV is 0.29 meter higher than parking apron, look-down camera could not cover the whole region. But 0.29 meter is already close enough for UAV to directly land, and our experiments also prove this strategy is practically feasible.
+
+
 \subsection{Results Achieved to Date}
 
 We have completed task one fully autonomously landing on the moving
 target at 5km/h, 10km/h and 15km/h. The results of these landings are
 shown in video. Moreover we demonstrate the effectiveness of our real
 time planning and tracking by showing the results of long time
-following of the target at over 35km/h. 
+following of the target at over 35km/h.
+
+For landing control, we first test our method to land on fixed truck, and result shows that precision is below 10 centimeters, which is close to an start-of-the-work by HKUST's team in ICRA2015. And for moving object, we succeeded ladning on truck with 15, 10 and 5 Km/h as shown in our attached video.
+
+\subsection{Future Work}
+\subsubsection{Landing Control}
+Since outdoor landing when target object is moving in high speed is an unsolved difficult problem, currently our landing is also restricted in straight-road landing. However in the challenge, starting from center crosswords, only a 20-meter straight road is available. If considering truck is moving with 15 Km/h (~4 m/s), UAV has to land within 5 seconds. Currently for development and safety consideration, our landing is slow and need around 15 seconds.
+In next stage, we plan to reevaluate this academic problems and make pioneer trails to generate realtime landing trajectory for landing during target object is turning with high speed.
+
 
 \end{document}
