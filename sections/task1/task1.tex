@@ -48,7 +48,7 @@ We used Gazebo\footnote{\url{gazebosim.org}} for virtual simulations
 algorithms are implemented in C/C++, Python and CUDA-C.
 
 
-\subsubsection{Visual Perception}
+\subsection{Visual Perception}
 
 The image processing is one of the fundamental component of autonomous
 systems. With efficient and robust image processing the planning and
@@ -111,17 +111,17 @@ Moreover, the tracker is updated online at fixed intervals.
 
 \subsection{Truck State Estimation}
 
-{\bf TODO}
+We could get relative pixel position of target object in fisheye camera with the help of our visual perception algorithm. Also UAV inside status data could be obtained from UAV, including flying height, velocities and rotation angles. Using these data, the speed of target object in world coordinate could be calculated. Finally with a low-pass filter's help, we could get quite accurate estimation of target velocity.
 
 \subsection{Motion Control}
 
 \subsubsection{Two-degree-of-freedom Control}
-{\bf TODO}
 
-\subsubsection{State Machine for Landing Landing Process}
-{\bf TODO}
+We present a two-degree-of-freedom control method including both feedforward and feedback method for truck tracking. With the help of the previous section, good estimation for the velocity of truck could be obtained and used by feedforward method. Then a PI controller could make gentle adjustments to help UAV lock itself just above the truck.
 
-Our landing algorithm is closely cooperating with our robust tracking algorithm. We defined an inverted conical region related to the center of the tracking object. When UAV is stably moving in this region, UAV is considered tightly keeping in tracking with the moving object. Then UAV starts going down with stable speed. And our strategy is that when UAV is 0.3[m] higher than truck, we will stop going down and adjust to the most center of the parking apron and land directly and quickly to it. The reason is that currently our tracker in vision algorithm is to detect the inside circle region of parking apron, whose radius is 0.5[m], and the look-down fisheye camera we used is $120^\circ$  for perspective, so it means when UAV is 0.29[m] higher than parking apron, look-down camera could not cover the whole region. But 0.29[m] is already close enough for UAV to directly land, and our experiments also prove this strategy is practically feasible.
+\subsubsection{State Machine for Landing Process}
+
+We carefully design a state machine for the landing process. We defined an inverted conical region related to the center of the tracking object. When UAV is stably moving in this region, UAV is considered tightly keeping in tracking with the moving object and UAV is allowed to go down with stable speed. Our strategy is that when UAV is 0.35[m] higher than truck, we will stop going down and to adjust to the most center of the parking apron and land directly and quickly to it. The reason is that currently our tracker in vision algorithm is to detect the inside circle region of parking apron, whose radius is 0.5[m], and the look-down fisheye camera we used is $120^\circ$  for perspective, so it means when UAV is 0.29[m] higher than parking apron, look-down camera could not cover the whole region. But 0.29[m] is already close enough for UAV to directly land, and our experiments also prove this strategy is practically feasible.
 
 
 \subsection{Results Achieved to Date}
@@ -130,7 +130,7 @@ We have completed task one fully autonomously landing on the moving
 target at 5[km/h], 10[km/h] and 15[km/h]. Moreover we demonstrate the effectiveness of our real time planning and tracking by showing the results of long time
 following of the target at over 35[km/h]. The results of these tracking and landing motion are shown in video.
 
-For landing control, we first test our method to land on fixed truck, and result shows that precision is below 10 centimeters, which is close to an start-of-the-work by HKUST's team in ICRA2015. And for moving object, we succeeded landing on truck with 15[km/h] as shown in Fig.\ref{figure:landing}.
+For landing control, we first test our method to land on fixed truck, and result shows that precision is below 10 centimeters, which is close to an start-of-the-art work by HKUST's team presenting in ICRA2015. And for moving object, we succeeded landing on truck with 15[km/h] as shown in Fig.\ref{figure:landing}.
 
 \begin{figure}[h]
     \begin{center}
@@ -143,7 +143,7 @@ For landing control, we first test our method to land on fixed truck, and result
 
 \subsection{Future Work}
 \subsubsection{Landing Control}
-Since outdoor landing when target object is moving in high speed is an unsolved difficult problem, currently our landing is also restricted in straight-road landing. However in the challenge, starting from center crosswords, only a 20[m] straight road is available. If considering truck is moving with 15 [Km/h] (~4 [m/s]), UAV has to land within 5[s]. Currently for development and safety consideration, our landing is slow and need around 15[s].
+Since outdoor landing when target object is turning in high speed is an unsolved difficult problem, currently our landing is also restricted in straight-road landing. However in the challenge, starting from center crosswords, only a 20[m] straight road is available. If considering truck is moving with 15[Km/h] (4.2[m/s]), UAV has to land within 5[s]. Currently for development and safety consideration, our landing is slow and need around 15[s].
 In next stage, we plan to reevaluate this academic problems and make pioneer trails to generate realtime landing trajectory for landing during target object is turning with high speed.
 
 
