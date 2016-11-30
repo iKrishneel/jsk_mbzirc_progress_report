@@ -18,18 +18,37 @@
 
 \begin{document}
 
-\section{Software}
+\subsection{Platforms}
+We customized the developer platform of DJI M100 as shown in Fig.\ref{figure:task1-platform}(Top). We used two Nvidia Jeston TX1 to distribute the load especially caused image processing. Those two processors are connected via a wired internal network.
+We also apply the camera with fisheye lens which has $250^\circ$ to have a wide view for tracking, as well as the optical-flow $\&$ sonar sensor units to estiamte the ego-motion of the UAV. The system framework can be described as Fig.\ref{figure:task1-platform}(Down), which the processing nodes inside the porcessers will be explained later.
+
+\begin{figure}[h]
+    \begin{center}
+        \begin{minipage}{\hsize}
+          \begin{center}
+      \includegraphics[clip, bb= 0 0 700 260, width=\columnwidth]{sections/task1/images/task1_hardware.eps}
+          \end{center}
+        \end{minipage}
+        \begin{minipage}{1.0\hsize}
+          \begin{center}
+      \includegraphics[clip, bb= 0 0 525 440, width=0.9\columnwidth]{sections/task1/images/task1_framework.eps}
+          \end{center}
+        \end{minipage}
+    \end{center}
+    \caption{Top: hardware platform DJI M100. Down: the system framework inside the platform.}
+    \label{figure:task1-platform}
+\end{figure}
 
 
 \subsection{Software Environment}
-The motion planning and visual perception algorithms are implemented
+The visual perception algorithms and motion control are implemented
 on Robot Operating System (ROS) environment\footnote{\url{http://www.ros.org}}.
 We used Gazebo\footnote{\url{gazebosim.org}} for virtual simulations
 \footnote{\url{https://github.com/start-jsk/jsk_mbzirc}}. Our
 algorithms are implemented in C/C++, Python and CUDA-C.
 
 
-\subsection{Visual Perception}
+\subsubsection{Visual Perception}
 
 The image processing is one of the fundamental component of autonomous
 systems. With efficient and robust image processing the planning and
@@ -38,6 +57,17 @@ and robustness of executing the assigned task. Hence, one of our
 primary objective while designing our software architectures was
 real-time performance with minimal loss of accuracy. The visual
 components of task one include three main stages described as follows:
+
+\subsubsection{Fisheye Camera Processing}
+To achive the image process based on the fisheye model, it is necessary to convert the raw image to pinhole model first. Besides, we also developed an original method called virual gimbal which combines the orientation data of UAV with the raw image data to calculate the level image frame Fig.\ref{figure:fisheye-virtual-gimbal}. This method is significantly important when the UAV tilts with large angle(e.g. $20^\circ$) while tracking the downward target.
+
+\begin{figure}[h]
+    \begin{center}
+      \includegraphics[width=0.9\columnwidth]{sections/task1/images/fisheye_virtual_gimbal.png}
+    \end{center}
+    \caption{Fisheye Virtual Gimbal}
+    \label{figure:fisheye-virtual-gimbal}
+\end{figure}
 
 \subsubsection{Target Detection}
 The target detection phase is the initial localization of the landing
@@ -79,25 +109,41 @@ Moreover, the tracker is updated online at fixed intervals.
   \caption{Illustration of truck and heliport detection.}
 \end{figure}
 
-\subsection{Control Method}
+\subsection{Truck State Estimation}
 
-\subsubsection{Landing Control}
-Our landing algorithm is closely cooperating with our robust tracking algorithm. We defined an inverted conical region related to the center of the tracking object. When UAV is stably moving in this region, UAV is considered tightly keeping in tracking with the moving object. Then UAV starts going down with stable speed. And our strategy is that when UAV is 0.3 meter higher than truck, we will stop going down and adjust to the most center of the parking apron and land directly and quickly to it. The reason is that currently our tracker in vision algorithm is to detect the inside circle region of parking apron, whose radius is 0.5 meter, and the look-down fisheye camera we used is 120 degree for perspective, so it means when UAV is 0.29 meter higher than parking apron, look-down camera could not cover the whole region. But 0.29 meter is already close enough for UAV to directly land, and our experiments also prove this strategy is practically feasible.
+{\bf TODO}
+
+\subsection{Motion Control}
+
+\subsubsection{Two-degree-of-freedom Control}
+{\bf TODO}
+
+\subsubsection{State Machine for Landing Landing Process}
+{\bf TODO}
+
+Our landing algorithm is closely cooperating with our robust tracking algorithm. We defined an inverted conical region related to the center of the tracking object. When UAV is stably moving in this region, UAV is considered tightly keeping in tracking with the moving object. Then UAV starts going down with stable speed. And our strategy is that when UAV is 0.3[m] higher than truck, we will stop going down and adjust to the most center of the parking apron and land directly and quickly to it. The reason is that currently our tracker in vision algorithm is to detect the inside circle region of parking apron, whose radius is 0.5[m], and the look-down fisheye camera we used is $120^\circ$  for perspective, so it means when UAV is 0.29[m] higher than parking apron, look-down camera could not cover the whole region. But 0.29[m] is already close enough for UAV to directly land, and our experiments also prove this strategy is practically feasible.
 
 
 \subsection{Results Achieved to Date}
 
 We have completed task one fully autonomously landing on the moving
-target at 5km/h, 10km/h and 15km/h. The results of these landings are
-shown in video. Moreover we demonstrate the effectiveness of our real
-time planning and tracking by showing the results of long time
-following of the target at over 35km/h.
+target at 5[km/h], 10[km/h] and 15[km/h]. Moreover we demonstrate the effectiveness of our real time planning and tracking by showing the results of long time
+following of the target at over 35[km/h]. The results of these tracking and landing motion are shown in video.
 
-For landing control, we first test our method to land on fixed truck, and result shows that precision is below 10 centimeters, which is close to an start-of-the-work by HKUST's team in ICRA2015. And for moving object, we succeeded ladning on truck with 15, 10 and 5 Km/h as shown in our attached video.
+For landing control, we first test our method to land on fixed truck, and result shows that precision is below 10 centimeters, which is close to an start-of-the-work by HKUST's team in ICRA2015. And for moving object, we succeeded landing on truck with 15[km/h] as shown in Fig.\ref{figure:landing}.
+
+\begin{figure}[h]
+    \begin{center}
+      \includegraphics[clip, bb= 0 0 720 315, width=1.0\columnwidth]{sections/task1/images/task1_landing.eps}
+    \end{center}
+    \caption{The landing process in the case of [15Km/h]. For more details, please check our video.}
+    \label{figure:landing}
+\end{figure}
+
 
 \subsection{Future Work}
 \subsubsection{Landing Control}
-Since outdoor landing when target object is moving in high speed is an unsolved difficult problem, currently our landing is also restricted in straight-road landing. However in the challenge, starting from center crosswords, only a 20-meter straight road is available. If considering truck is moving with 15 Km/h (~4 m/s), UAV has to land within 5 seconds. Currently for development and safety consideration, our landing is slow and need around 15 seconds.
+Since outdoor landing when target object is moving in high speed is an unsolved difficult problem, currently our landing is also restricted in straight-road landing. However in the challenge, starting from center crosswords, only a 20[m] straight road is available. If considering truck is moving with 15 [Km/h] (~4 [m/s]), UAV has to land within 5[s]. Currently for development and safety consideration, our landing is slow and need around 15[s].
 In next stage, we plan to reevaluate this academic problems and make pioneer trails to generate realtime landing trajectory for landing during target object is turning with high speed.
 
 
