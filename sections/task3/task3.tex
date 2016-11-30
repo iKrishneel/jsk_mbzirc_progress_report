@@ -1,11 +1,34 @@
-
+]
 %Copyright (C) 2016 by Krishneel@JSK Lab, The University of Tokyo
 
 \documentclass{standalone}
 \begin{document}
 
 \subsection{Platforms}
-For task 3, we developed two types of UAVs. We first used customized DJI M100 as our standard platform\ref{task3platform-m100} which had been introduced in task 1. We equipped Nvidia Jetson TX1 and TK1 based embedded computer to do both control and vision algorithms. The magnets gripper is redesigned to be stronger to pick the objects and also for the drone to fly more stable. For the second type, we improved the transformable aerial robot called {\bf Hydrus} \ref{task3platform-hydrus} as described in the first report. The propeller of  {\bf Hydrus} is 14[inch] which is much bigger than the prototpye, leading to the improvement of the flight performance. Temporarily we did the real world test through remote operation with the standard platform, we are also trying to set up the network configurations which is given by the MBZIRC committee recently. Also we accelerate our vision algorithm in gazebo simulation as we showed in the first report. For now we are trying to develop a semi-autonomous approach for task 3 considering the difficulties we meet in manually operation.
+
+For task 3, we developed two types of UAVs. We first used customized
+DJI M100 as our standard platform\ref{task3platform-m100} which has
+been introduced in task 1. The UAV is equipped with Nvidia Jetson TX1
+and TK1 based embedded computers to run control and vision
+algorithms. 
+We re-designed the magnetic gripper with improved strength and
+reinforcements for picking up variety of objects. Moreover, the UAV is
+more stable with the newer design as drag is reduced.
+For the second type, we improved the transformable aerial robot called
+{\bf Hydrus} \ref{task3platform-hydrus} as described in the first
+report. The propellers of {\bf Hydrus} are 14[inches] which is longer
+than the prototpye, as a result the flight performance is
+improved. Temporarily we used the standard platform via remote operation to
+perform real world test. Moreover, we are trying to setup the network
+configurations using the requirements of the competition. 
+
+%% Also we accelerate
+%% our vision algorithm in gazebo simulation
+%% as we showed in the first report. For now we are trying to develop a
+%% semi-autonomous approach for task 3 considering the difficulties we
+%% meet in manually operation.
+
+
  \begin{figure}%[hb]
     \begin{center}
     \includegraphics[keepaspectratio=true, width=1\linewidth, height=0.3\textheight]
@@ -24,7 +47,14 @@ For task 3, we developed two types of UAVs. We first used customized DJI M100 as
     
     
 \subsection{Electromagnet Gripper for Quadcopter}
-The reason we choose electromagnet is that it is easy to control if we design the circuits ourselves. The ordinary seems stronger but it may requires executor unit to push the object down when the drone will to release the object, which will make the attachment more complex and additional motor is needed. We also considered to use a air vacuum like our team in Amazon Picking Challenge, but the size of vacuum is too big for the drone in our case. 
+
+The choice of electromagnet is based on easy control and also the circuits
+can readily be designed by ourselves. The ordinary once are stronger but it
+requires executor unit to push the object for releasing, which will
+make the attachment more complex and may also require an additional motor. We
+also contemplated to use a air vacuum but the size of vacuum is too
+big for our drone.
+
  \begin{figure}[hb]
     \begin{center}
     \includegraphics[keepaspectratio=true, width=1\linewidth, height=0.3\textheight]
@@ -34,7 +64,32 @@ The reason we choose electromagnet is that it is easy to control if we design th
     \label{task3platform}
     \end{figure}
 
-We equipped 5 small electromagnets for a gripper of size $8cm \times 8cm$. Each electromagnet is capable of more than $20 N$ holding force if the objects are thick enough. However, according to our experiment, since each object is less than $500 g$, the thickness will be less than $1.6 mm$ if the object is a square of $20cm \times 20cm$ and made of pure iron(consider the density of iron to be $7.86 g/cm$). In addition, if the surface of the object is too large, the propeller effect will happen and therefore request the electromagnets to be more powerful. Temporary our gripper with $5$ electromagnets can pick the object of almost $1kg$ of the thickness of the iron is more than $0.3mm$. 
+We equipped 5 small electromagnets on a gripper of size $8cm \times
+8cm$. Each electromagnet is capable of more withstanding than $20 N$
+of force given a good object thickness. The gripper shown in
+Fig.\ref{task3platform} consisting of $5$
+electromagnets can pick the object of almost $1kg$ of the thickness of
+the iron is more than $0.3mm$.
+The gripper is also equipped with four touch sensors to detect
+object--gripper contact state. Moreover,
+these touch sensors are used to evaluate the position of the gripper
+with respect to the object and the relative offset. 
+%% For instance if $2$ or $3$ touch sensors
+%% are triggered and then we know the offset of the gripper and the
+%% object. 
+
+%% However, according to our experiment,
+%% since each object is less than $500 g$, the thickness will be less
+%% than $1.6 mm$ if the object is a square of $20cm \times 20cm$ and made
+%% of pure iron(consider the density of iron to be $7.86 g/cm$). 
+%% In
+%% addition, if the surface of the object is too large, the propeller
+%% effect will happen and therefore request the electromagnets to be more
+%% powerful. Temporary our gripper with $5$ electromagnets can pick the
+%% object of almost $1kg$ of the thickness of the iron is more than
+%% $0.3mm$. 
+
+
  \begin{figure*}%[hb]
     \begin{center}
     \includegraphics[keepaspectratio=true, width=1\linewidth, height=0.3\textheight]
@@ -44,16 +99,86 @@ We equipped 5 small electromagnets for a gripper of size $8cm \times 8cm$. Each 
     \label{task3tele}
     \end{figure*}
 
-Four touch sensors are equipped on the gripper with the electromagnets to detect the contacts between the object and the gripper. Besides, these touch sensors will bring the position information of the gripper compared to the object since sometimes only $2$ or $3$ touch sensors are triggered and then we know the offset of the gripper and the object. 
     
-The design of the electromagnet circuits driver is simple since it can be simply regarded as a series connection of a inductor and a small resistor, Darlington Transistor will be enough to driver a electromagnet since the current request is only $200 ma$. Because of the inductor effect, a protection diode is very necessary in the circuits. We designed the circuits board with a $32$ bits micro controller, a Darlington driver IC and both serial, CAN communication interface in the gripper board. We write a ROS node in the board and it can directly report the status of the magnets and touch sensors in the gripper and also receive the orders from the embedded computers. 
+The design of the electromagnet circuits driver is simple since it can
+be simply regarded as a series connection of a inductor and a small
+resistor. Darlington Transistor is suitable to drive an
+electromagnet as the current requirement is only $200 ma$. Because of
+the inductor effect, a protection diode is necessary in the
+circuits to prevent backflow. We designed the circuits board with a
+$32$ bits micro controller, a Darlington driver IC and both serial, CAN communication
+interface in the gripper board. An on board driver written on ROS node
+collects the status of the magnets and the touch sensors in the
+gripper and reports these information to the embedded computers.
+
+%% on board driver written on ROS
+%% the status of the magnets and the touch sensors in the gripper can be
+%% collected and reported 
+%% it can directly report the status of the magnets and touch sensors in
+%% the gripper and also receive the orders from the embedded computers. 
+
 
 \subsection{Teleoperation for Task 3}
-At this moment, we only perform the real platform experiment through teleoperation by human beings. When we control the UAV manually to pick the object, we figure out it is not a easy job for real UAV platform compared to the simulation since it is very difficult to control the UAV accurately to approach the object, in addition, the ground effect will unstable the UAV when the UAV is getting close to the ground. We address this problem by hanging the magnet gripper with a spring so that the UAV can pick the object without getting too close to the ground. However this may introduce another problem that the gripper will be shaking whenever the UAV change the velocity, we are also addressing this problem now and try to get a stronger hanging method to make the gripper relatively stable.
 
-We tested on only one UAV and it seems we can pick $5$ static objects within $8$ minutes, the time could be improved if we adopt the semi-autonomous teleoperation method like store the global position of the box to drop the objects and after pick the object, the UAV can directly move to the global position of the aim box.
+We performed experiments using the aforementioned hardware interfaced
+on the UAV. The UAVs were controlled through tele--operation. The
+software which were implemented on the simulator needs
+fine-tuning to operate in the real world. Approaching the object for
+grasping is relatively difficult due to rapid visual changes. A more
+crucial problem when approaching the object is the ground effect which 
+results in unexpected behaviour and the UAV becomes unstable very
+quickly. We addressed this problem by suspending the magnet gripper with
+a spring so that the UAV can pick the object without getting too close
+to the ground. However this introduces another problem i.e., causes
+the gripper to shake whenever the UAV change the velocity. We are
+currently working towards alleviating the problem.
+
+
+
+%% When we control the UAV manually to
+%% pick the object, we figure out it is not a easy job for real UAV
+%% platform compared to the simulation since it is very difficult to
+%% control the UAV accurately to approach the object, in addition, the
+%% ground effect will unstable the UAV when the UAV is getting close to
+%% the ground. We address this problem by hanging the magnet gripper with
+%% a spring so that the UAV can pick the object without getting too close
+%% to the ground. However this may introduce another problem that the
+%% gripper will be shaking whenever the UAV change the velocity, we are
+%% also addressing this problem now and try to get a stronger hanging
+%% method to make the gripper relatively stable.
+
+%% At this moment, we only perform the real platform experiment through
+%% teleoperation by human beings. When we control the UAV manually to
+%% pick the object, we figure out it is not a easy job for real UAV
+%% platform compared to the simulation since it is very difficult to
+%% control the UAV accurately to approach the object, in addition, the
+%% ground effect will unstable the UAV when the UAV is getting close to
+%% the ground. We address this problem by hanging the magnet gripper with
+%% a spring so that the UAV can pick the object without getting too close
+%% to the ground. However this may introduce another problem that the
+%% gripper will be shaking whenever the UAV change the velocity, we are
+%% also addressing this problem now and try to get a stronger hanging
+%% method to make the gripper relatively stable.
+
+\subsection{Results}
+
+We performed experiments using one UAV i.e., the standard platform. 
+%We tested on one UAV and it seems 
+On average we can pick $5$ static objects within $8$ minutes, the time
+could be improved if we adopt the
+semi-autonomous teleoperation method like store the global position of
+the box to drop the objects and after picking the object, the UAV can
+directly move to the global position of the drop box.
+
 
 \subsection{Future Work}
-In the next step of task 3 we are going to improve our vision detection method that has been already showed in the gazebo simulation and then put it into the real UAV tasks to make task 3 full autonomous. Also we will design a multi UAVs cooperation strategy for task 3 both for teleoperation and full autonomous.
+In the next step of task 3 we are going to improve our vision
+detection method. While the performance of these algorithms yield good
+results in simulation, they still need improvements when applying to
+the real world. With improvements in the vision algorithms and reduced
+in gripper shakes we will make the task3 fully autonomous 
+Also we will design a multi UAVs cooperation strategy for
+task 3 both for teleoperation and full autonomous.
+
 
 \end{document}
