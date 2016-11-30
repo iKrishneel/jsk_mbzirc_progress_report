@@ -81,7 +81,8 @@ Gaussian based background subtraction fused with Kalman Filters for
 global motion compensation to generate regions of interest
 (ROI)  with stable changes. The candidate ROI's are then ranked using
 edge similarity between each sliding window. High scoring ROI are then
-used for detecting the heliport using a pre-trained detector. 
+used for detecting the heliport using a pre-trained
+detector. The initial target detection result is shown in Fig.\ref{fig:detection}.
 In the following, let $\mathbf{H}$ denote the detected target region.
 
 \subsubsection{Target Tracking}
@@ -101,11 +102,12 @@ through several pre-trained kernels of varying dimensions. By varying
 the sizes of the kernel, an approximate scale can also be detected.
 Furthermore, the tracker is updated online at fixed intervals.
 
-\begin{figure}[t!]
+\begin{figure}[b!]
   \centering
   \includegraphics[height=1in]{sections/task1/images/detect2}
   \includegraphics[height=1in]{sections/task1/images/detect1}
   \caption{Illustration of truck and heliport detection.}
+  \label{fig:detection}
 \end{figure}
 
 \subsection{Truck State Estimation}
@@ -123,21 +125,22 @@ We present a two-degree-of-freedom control method including both feedforward and
 We carefully designed a state machine for the landing process. We defined an inverted conical region relative to the center of the tracking object. When UAV is stably moving in this region, UAV is considered to be tightly keeping track of the moving object, and the UAV is allowed descend with a stable speed. Our strategy is that once the UAV is within 0.35[m] above the truck, we will stop its gradual descend and adjust the UAV's position to the center of the heliport and land directly and quickly to it. The reason is that currently our visual tracker detects the inside circle region of the heliport, whose radius is 0.5[m], and the fisheye camera we use has a $120^\circ$ viewing angle. This means that when the UAV is less than 0.29[m] above the heliport, the camera would not be able to see the whole heliport. 0.29[m] is a close enough distance for the UAV to land directly, and our experiments also proved that this strategy is feasible and practical.
 
 
-\subsection{Results Achieved to Date}
-
-We have completed the entire task one autonomously, landing on the 
-target moving at 5[km/h], 10[km/h], and 15[km/h]. Moreover, we have demonstrated the effectiveness of our real time planning and tracking by showing the results of long duration
-following of the target at over 35[km/h]. The results of these tracking and landing motion are shown in the progress video.
-
-For landing control, we first tested our method to land on a static truck, and result shows that precision is within 10 centimeters, which is close to the results of a state-of-the-art work by HKUST's team who presented in ICRA2015. For a moving target, we succeeded in landing on the truck moving at 15[km/h] as shown in Fig.\ref{figure:landing}.
-
-\begin{figure}[h]
+\begin{figure}[b]
     \begin{center}
       \includegraphics[clip, bb= 0 0 720 315, width=1.0\columnwidth]{sections/task1/images/task1_landing.eps}
     \end{center}
     \caption{The landing process in the case of [15km/h]. For more details, please see our video.}
     \label{figure:landing}
 \end{figure}
+
+\subsection{Results Achieved to Date}
+
+We have completed the entire task one autonomously, landing on the 
+target moving at 5[km/h], 10[km/h], and 15[km/h]. Moreover, we have demonstrated the effectiveness of our real time planning and tracking by showing the results of long duration
+following of the target at over 35[km/h]. The results of these tracking and landing motion are shown in the progress video. %The heliport detection result is shown in Fig.\ref{fig:detection}.
+
+For landing control, we first tested our method to land on a static truck, and result shows that precision is within 10 centimeters, which is close to the results of a state-of-the-art work by HKUST's team who presented in ICRA2015. For a moving target, we succeeded in landing on the truck moving at 15[km/h] as shown in Fig.\ref{figure:landing}.
+
 
 
 \subsection{Future Work}
