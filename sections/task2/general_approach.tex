@@ -2,14 +2,14 @@
 At first we tried to searching the panel by using long range laser sensor.
 However, it was difficult to detect the panel because of the low density of points in long range.
 So our second approach is running around the arena and searching the panel from pointcloud from the stereo camera.
-When the panel is out of the range of stereo camera, the robot runs [run whole arena, I don't know good expression].
+When the panel is not visible within the robot's field of view, meaning that the panel is either out of range of the camera or is in another direction, the robot will naviagate around the arena to search for the panel.
 Then when the panel enter the range of stereo camera, the robot recognizes the panel by finding
-the cluster of pointcloud which places about 1 meter height from ground and approach to the panel(Fig.\ref{fig: task2_panel-recognition}).
+the cluster of pointcloud which places about 1 meter height from ground(Fig.\ref{fig: task2_panel-recognition}) and approach to the panel.
 Finally, the robot runs around of the panel, recognizes it's the front side, then move to the front of the panel.
 
 \begin{figure}[htb]
   \begin{center}
-    \includegraphics[width=0.40\columnwidth]{sections/task2/nowprinting.png}
+    \includegraphics[width=0.80\columnwidth]{sections/task2/images/panel_detect.png}
     \caption{Panel Recognition from Pointcloud}
     \label{fig: task2_panel-recognition}
   \end{center}
@@ -28,7 +28,7 @@ We experimented our recognition method and confirmed the accuracy of the recogni
 
 \begin{figure}[htb]
   \begin{center}
-    \includegraphics[width=0.40\columnwidth]{sections/task2/nowprinting.png}
+    \includegraphics[width=0.80\columnwidth]{sections/task2/images/wrench_valve_recog.png}
     \caption{Wrenches and Valve Stem Recognition}
     \label{fig: task2_object-recognition}
   \end{center}
